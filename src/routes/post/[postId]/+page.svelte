@@ -3,6 +3,7 @@
 	import { postList } from "$lib/store";
 	import { goto } from "$app/navigation";
 	import Forma from "$lib/components/forma.svelte";
+	import postApi from "$lib/postApi";
 
 	let post = { id: "123", title: "sdadasd", content: "asdasdas" };
 	post = $postList[$postList.findIndex(({ id }) => id === $page.params.postId)];
@@ -13,6 +14,7 @@
 			console.log(list);
 			return list;
 		});
+		postApi.saveData($postList);
 		goto("/");
 	}
 </script>

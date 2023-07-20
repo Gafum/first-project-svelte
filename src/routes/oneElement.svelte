@@ -1,6 +1,7 @@
 <script>
 	import { goto } from "$app/navigation";
 	import { postList } from "$lib/store";
+	import postApi from "$lib/postApi";
 	export let title, content, id;
 	function openPage() {
 		goto("/post/" + id);
@@ -15,6 +16,7 @@
 			);
 			return list;
 		});
+		postApi.saveData($postList);
 	}
 </script>
 

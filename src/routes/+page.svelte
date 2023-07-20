@@ -2,9 +2,16 @@
 	import { postList } from "$lib/store";
 	import OneElement from "./oneElement.svelte";
 	import Forma from "$lib/components/forma.svelte";
+	import { onMount } from "svelte";
+	import postApi from "$lib/postApi";
+
+	onMount(() => postList.set(postApi.readData()));
 
 	function changeList(event) {
-		postList.update((n) => [...n, { ...event.detail, id: Date.now().toString() }]);
+		postList.update((list) => {
+			return [...list, { ...event.detail, id: Date.now().toString() }];
+		});
+		postApi.saveData($postList);
 	}
 </script>
 
