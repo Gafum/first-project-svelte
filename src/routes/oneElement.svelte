@@ -1,8 +1,20 @@
 <script>
 	import { goto } from "$app/navigation";
+	import { postList } from "$lib/store";
 	export let title, content, id;
-	function openPage(params) {
+	function openPage() {
 		goto("/post/" + id);
+	}
+	function deleteElement() {
+		let res = confirm(`Delete ${title}`);
+		if (!res) return;
+		postList.update((list) => {
+			list.splice(
+				list.findIndex((el) => el.id === id),
+				1
+			);
+			return list;
+		});
 	}
 </script>
 
@@ -11,6 +23,7 @@
 <div on:click={openPage}>
 	<h3>{title}</h3>
 	<p>{content}</p>
+	<button on:click|stopPropagation={deleteElement}> delete </button>
 </div>
 
 <style>

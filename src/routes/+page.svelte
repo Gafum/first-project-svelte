@@ -2,6 +2,10 @@
 	import { postList } from "$lib/store";
 	import OneElement from "./oneElement.svelte";
 	import Forma from "$lib/components/forma.svelte";
+
+	function changeList(event) {
+		postList.update((n) => [...n, { ...event.detail, id: Date.now().toString() }]);
+	}
 </script>
 
 <section class="main-list">
@@ -11,7 +15,7 @@
 </section>
 
 <section class="main-forma">
-	<Forma />
+	<Forma on:save={changeList} />
 </section>
 
 <style>
@@ -22,6 +26,7 @@
 		gap: 10px;
 		padding-left: 10px;
 		padding-top: 10px;
+		margin: 40px 0 10px;
 	}
 
 	.main-forma {

@@ -14,6 +14,10 @@
 		justify-content: flex-start;
 		align-items: center;
 		box-shadow: 0px 3px 10px black;
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
 	}
 	a {
 		text-decoration: none;

@@ -1,17 +1,18 @@
 <script>
-	import { postList } from "../store";
+	import { createEventDispatcher } from "svelte";
 
-	let title = "",
+	export let title = "",
 		content = "";
+	const dispatch = createEventDispatcher();
 
-	function changeList() {
+	function saveData() {
 		if (!title || !content) return;
-		postList.update((n) => [...n, { title, content, id: Date.now().toString() }]);
+		dispatch("save", { title, content });
 		title = content = "";
 	}
 </script>
 
-<form on:submit|preventDefault={changeList}>
+<form on:submit|preventDefault={saveData}>
 	<input type="text" placeholder="Title" bind:value={title} />
 	<textarea cols="30" rows="10" placeholder="Content" bind:value={content} />
 	<button> Add </button>
@@ -23,6 +24,7 @@
 		flex-direction: column;
 		gap: 10px;
 		padding: 10px;
+		width: 100%;
 	}
 
 	input,
@@ -32,6 +34,7 @@
 		outline: none;
 		border: 1px solid black;
 		border-radius: 5px;
+		width: 100%;
 	}
 
 	button {
